@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+     <link rel="stylesheet" href="../../css/nav.css"> 
+     <link rel="stylesheet" href="../../css/list.css">
+</head>
+<body>
+  {{>navbar}}
+    <div class="img22"></div>
+        <table  id="abd">
+         <thead>
+      
+        <tr>
+            <th>FirstName</th>
+            <th>LasrName</th>
+            <th>Password</th>
+       
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Mob.</th>
+             <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody class="tb">
+                {{#each list}}
+                <tr align="center">
+              
+                      <td>{{this.firstname}}</td>
+                      <td>{{this.lastname}}</td>
+                      <td>{{this.password}}</td>
+                
+                      <td>{{this.gender}}</td>
+                      <td>{{this.email}}</td>
+                      <td>{{this.phone}}</td>
+                      <td>
+                        <a href="/update/{{this._id}}" style="color: rgb(238, 241, 240);"> 
+                        <i class="fa fa-edit" > </i> </a>
+                      </td>
+                      <td>
+                        <a href="/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');" style="color: rgb(238, 241, 240);"> 
+                        <i class="fa fa-trash" > </i></a>
+                      </td>
+                </tr>
+                {{/each}}
+              
+        </tbody>
+        </table>
+      </div>
+</body>
+</html>

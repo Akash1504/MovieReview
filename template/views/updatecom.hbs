@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/nav.css"> 
+     <link rel="stylesheet" href="../../css/updatecom.css">
+</head>
+<body>
+    {{>navbar}}
+
+    <div class="bg-img45">
+       <div  class="container1">
+           
+            <h3 style="color:rgb(180, 104, 5)">{{viewTitle}}</h3>
+              <form action="/updatec" method="POST">
+                 <input type="hidden" name="_id" value="{{movies._id}}">
+            
+             
+           
+                                    
+                                    <div class="col-sm-12">
+                                            <label style="font-size: medium;font-family:Georgia, 'Times New Roman', Times, serif;color:#bbadad">
+                                        <div class="form-group ">
+                                            <label>Text:</label>
+                                            <input type="text"  class="form-control" size="50" placeholder="comment *" value="{{movies.text}}" name="text" />
+                                        </div>
+                                        <div class="form-group ">
+                                            <label>Rating:</label>
+                                            <input type="text"  class="form-control" size="50" placeholder="Rating *" value="{{movies.rating}}" name="rating" />
+                                        </div>
+                                        <input type="submit"  class="btn1-in"  value="Update"/>
+                                   </label>
+                                    </div>
+                                    
+                                  
+                                        
+                                
+            </form>
+            </div>
+            
+</div>
+
+
+</body>
+</html>

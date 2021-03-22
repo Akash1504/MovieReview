@@ -1,0 +1,70 @@
+.img2 {
+    
+    background-image: url("../img/zach-savinar-mFYm4SZjmCY-unsplash.jpg");
+    min-height: 700px;
+    padding-top: 7%;
+
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+    position: absolute;
+    top: 70px;
+    left: 140px;
+ width: 90%;
+ height: 100%;
+
+}
+input[type=email] {
+    padding: 10px;
+    width: 250%;
+    margin: 0px 0 15px 0;
+    border-style:solid;
+    border-width:thin;
+    border-color: rgb(26, 23, 23);
+    background: #f1f1f1;
+  }
+  input[type=text] {
+    padding: 10px;
+    width: 250%;
+    margin: 0px 0 15px 0;
+    border-style:solid;
+    border-width:thin;
+    border-color: rgb(26, 23, 23);
+    background: #f1f1f1;
+  }
+  input[type=password]{
+      
+    padding: 10px;
+    width: 250%;
+    margin: 0px 0 15px 0;
+    border-style:solid;
+    border-width:thin;
+    border-color: rgb(26, 23, 23);
+    background: #f1f1f1;
+  }
+  .btn-info {
+    position:absolute;
+    left: 130px;
+    top: 92%;
+  background-color: #f4511e;
+  color: white;
+  cursor: pointer;
+  width: 20%;
+  height: 5%;
+  font-size:x-large;
+  opacity: 0.9;
+  border-radius: 4px;
+  border: none;
+
+  
+ 
+}
+
+.btn-info:hover {
+  opacity: 1;
+  color: black;
+
+}

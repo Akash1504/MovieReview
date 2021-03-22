@@ -1,0 +1,40 @@
+body, html {
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .bg-img66 {
+  
+    background-image: url("../img/the-amazing-spider-man-2.jpg");
+    min-height: 700px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+  }
+  .btn{
+    position:absolute;
+    left: 95px;
+    top: 100%;
+  background-color: #911031;
+  color: white;
+  cursor: pointer;
+  width: 20%;
+  
+ 
+}
+
+.btn:hover {
+  opacity: 1;
+}
+input[type=text]:focus {
+    background-color: rgb(224, 120, 59);
+    outline: none;
+    color: rgb(206, 201, 198);
+    font-size: large;
+    font-weight: ;
+  }

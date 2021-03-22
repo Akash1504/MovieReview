@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Employee</title>
+    <link rel="stylesheet" href="../../css/nav.css"> 
+     <link rel="stylesheet" href="../../css/updateuser.css"> 
+  </head>
+  <body>
+      {{>navbar}}
+<div class="img2">
+    <div class="container">
+   
+     
+      <h3>{{viewTitle}}</h3>
+      <form action="/update"  method="POST">
+       <input type="hidden" name="_id" value="{{user._id}}">
+        <label style="font-size: medium;font-family:Georgia, 'Times New Roman', Times, serif;color:#8b0505;font-weight:bold">
+                     
+           <div class = "form-group">
+                      <label>FirstName:</label><br>               
+                <input type="text" class="form-control" name="firstname" placeholder="FirstName" value="{{user.firstname}}">
+            </div>
+          
+            <div class = "form-group">
+                <label>LastName:</label><br> 
+                <input type="text" class="form-control" name="lastname" placeholder="Course Id" value="{{user.lastname}} " required>
+            </div>
+
+            <div class = "form-group">
+                <label>Password:</label><br> 
+                <input type="password" class="form-control" name="password" placeholder="password" value="{{user.password}} " required>
+            </div>
+
+            <div class = "form-group">
+                 <label >ConfirmPassword:</label><br> 
+              <input type="password"  class="form-control" name="confirmpassword" placeholder="confirmpassword" value="{{user.confirmpassword}} " required>
+            </div>
+
+            <div class = "form-group">
+                 <label >Email:</label><br> 
+                <input type="email"  class="form-control" name="email" placeholder="email" value="{{user.email}} " required>
+            </div>
+
+            <div class="form-group">
+                 <label>Phone:</label><br> 
+                <input  type="text" minlength="10" maxlength="10" name="phone" class="form-control" placeholder="Your Phone *" value="{{user.phone}}" required />
+             </div>
+
+             <div class="form-group">
+                                            
+                <div class="maxl">
+                                                
+                  <label style="position: absolute;top:570px">Gender:</label>
+                    <input style="position: absolute;top:570px;left:90px" type="radio" name="gender" value="male" checked>
+                        <span style="position: absolute;top:570px;left:110px;color:black"> Male </span> 
+                    <input style="position: absolute;top:570px;left:170px" type="radio" name="gender" value="female">
+                        <span style="position: absolute;top:570px;left:190px;color:black">Female </span> 
+                                              
+                </div>
+             </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn-info">Submit</button>
+                
+            </div>
+      </label>
+      </form>
+    </div>
+</div>
+  </body>
+</html>-

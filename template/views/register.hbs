@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    
+ 
+    {{>header}}
+</head>
+<body>
+    {{>navbar}}
+
+    <div class="bg-img">
+       <div  class="container p-3 my-3 bg-dark text-white ">
+           
+          
+              <form action="/register" method="POST">
+            
+                <h1 style="color: crimson;">User Registration</h1>
+           
+                                    
+                                    <div class="col-sm-12">
+                                       
+                                            <label style="font-size: medium;font-family:Georgia, 'Times New Roman', Times, serif;color:#181515">
+                                        <div class="form-group ">
+                                            <label>FirstName:</label>
+                                            <input type="text" class="form-control" size="50" placeholder="First Name *" value="" name="firstname" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>LastName:</label>
+                                            <input type="text" class="form-control" placeholder="Last Name *" value="" name="lastname" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Password:</label>
+                                            <input type="password" style="position: absolute;top:200px;left:14px;width:92%;border: solid;border-color: coral;background-color:rgb(173, 189, 196);input:focous" class="form-control" size="50" placeholder="Password *" value="" name="password" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="position: absolute;top:260px;">ConfirmPassword:</label>
+                                            <input type="password" style="position:absolute;top:285px;left:14px;width:92%;border: solid;border-color: coral;background-color:rgb(173, 189, 196);" class="form-control"  placeholder="Confirm Password *" value="" name="confirmpassword" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="position: absolute;top:350px">Email:</label>
+                                            <input type="email" style="position: absolute;top:375px;width:92%;left:14px;border-style:ridgepx;border: solid;border-color: coral;background-color:rgb(173, 189, 196);" class="form-control" placeholder="Your Email *" value="" name="email"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="position: absolute;top:440px;">Phone:</label>
+                                            <input  type="text" minlength="10" maxlength="10" style="position: absolute;top:465px;width:92%" class="form-control" placeholder="Your Phone *" value="" name="phone" />
+                                        </div>
+                                        <div class="form-group">
+                                            
+                                            <div class="maxl">
+                                                
+                                                    <label style="position: absolute;top:530px">Gender:</label>
+                                                    <input style="position: absolute;top:530px;left:90px" type="radio" name="gender" value="male" checked>
+                                                            <span style="position: absolute;top:530px;left:110px"> Male </span> 
+                                                    <input style="position: absolute;top:530px;left:170px" type="radio" name="gender" value="female">
+                                                            <span style="position: absolute;top:530px;left:190px">Female </span> 
+                                              
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="position: absolute;top:570px;">Role:</label>
+                                            <input  type="text"  style="position: absolute;top:595px;width:92%" class="form-control" placeholder="Your Role *" value="" name="role" />
+                                        </div>
+                                    
+                                        <input type="submit" style="position:absolute;top:660px;font-size: large;" class="btn"  value="Register"/>
+                                   </label>
+                                    </div>
+                                    
+                                  
+                                        
+                                
+            </form>
+            </div>
+            
+</div>
+
+
+</body>
+</html>

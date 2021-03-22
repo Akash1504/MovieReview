@@ -1,0 +1,66 @@
+
+body, html {
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .bg-img44 {
+  
+    background-image: url("../img/Spider-man-3-wallpaper.jpg");
+  
+    min-height: 810px;
+ 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+  }
+  
+
+   
+   .containerr {
+    position: absolute;
+    top: 380px;
+    right: 480px;
+  width: 30%;
+  height: 30%;
+  border-style: solid;
+  border-color: rgb(243, 233, 233);
+  background-color: rgb(59, 56, 56);
+  } 
+
+  .btn-in {
+    position:absolute;
+    left: 120px;
+    top: 92%;
+  background-color: #f4511e;
+  color: white;
+  cursor: pointer;
+  width: 40%;
+  height: 35%;
+  font-size:x-large;
+  opacity: 0.9;
+  border-radius: 4px;
+  border: none;
+
+  
+ 
+}
+
+.btn-in:hover {
+  opacity: 1;
+  color: black;
+
+}
+input[type=text]:focus {
+  background-color: rgb(192, 39, 72);
+  outline: none;
+  color: rgb(20, 19, 19);
+  font-size: large;
+  
+}
+  

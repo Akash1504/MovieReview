@@ -1,0 +1,101 @@
+body, html {
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .bg-imgg {
+    /* The image used */
+    background-image: url("../img/the-amazing-spider-man-2.jpg");
+  
+    min-height: 700px;
+    
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+  }
+  
+
+  
+  div.containers {
+    position: absolute;
+    top: 300px;
+    left: 134px;
+ width: 30%;
+ height: 30%;
+ border-style: solid;
+border-width:thick;
+border-color: rgb(14, 13, 13);
+  background-color: rgb(70, 66, 66);
+  }
+  
+.input-w label, .input-w input{
+    float: none;
+    display: inline-block;
+    vertical-align: middle;
+
+
+}
+
+input[type=email] {
+  position: absolute;
+  left: 25px;
+  top: 15%;
+  width: 90%;
+  
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border-style: double;
+  border-width: medium;
+  border-color: brown;
+  background: #f1f1f1;
+}
+input[type=password]{
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  width: 90%;
+  
+  padding: 15px;
+  margin: 5px 0 22px 0;
+border-style: double;
+border-width: medium;
+border-color: brown;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+  .btns {
+      position:absolute;
+      left: 95px;
+      top: 80%;
+    background-color: #911031;
+    color: white;
+    cursor: pointer;
+    width: 60%;
+    
+   
+  }
+  
+  .btns:hover {
+    opacity: 1;
+  } 
+  
+  .msg{
+    position:absolute;
+    top:30%;
+    left: 15%;
+    font-size: xx-large;
+    color: red;
+    font-style: italic;
+  }

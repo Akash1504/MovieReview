@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+       .bg-img1 {
+    
+    background-image: url("../img/the-amazing-spider-man-2.jpg");
+  
+    min-height: 700px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+  }
+  </style>
+    {{>header}}
+</head>
+<body>
+  {{>navbar}}
+    <div class="bg-img1">
+        <table border="1" class="table table-bordered">
+       <thead style="background-color: coral;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: xx-large;text-align:center">
+       
+        <tr>
+        <th>Name</th>
+        <th>Comments</th>
+        
+    
+        </tr>
+        </thead>
+        <tbody style="background-color: rgb(85, 87, 87);">
+        {{#each movielist}}
+        <tr align="center">
+            <td style="font-size: xx-large;color:rgb(247, 240, 240) ">{{this.name}}</td>
+            <td style="font-size: xx-large;color:rgb(247, 240, 240) ">{{this.comments.name}} <a href="/getmovie/{{this._id}}" style="color: rgb(4, 56, 27);"> Check </a></td>
+            
+        </tr>
+        {{/each}}
+        </tbody>
+        </table>
+    </div>
+</body>
+</html>

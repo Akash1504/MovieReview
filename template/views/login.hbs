@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      
+       <head>
+         {{>header}}
+         
+      
+        </head>
+<body>
+     {{>navbar}}
+     <div class="msg">
+            {{viewTitle}}
+     </div>
+       
+    <div class="bg-imgg">
+        <div  class="containers p-3 my-3 bg-dark text-white">
+    <form class="form-signin" action="/login" method="POST">
+  
+            <label  style="position:absolute;top:10px;font-family:Georgia, 'Times New Roman', Times, serif;left:1%;float: left;font-size:small;color:rgb(192, 210, 30)">Email:</label>
+             <input type="email" style="font-size: small;" class="form-control"  placeholder="Email" required name="email">       
+   
+
+            <label style="position:absolute;top:80px;left:1%;font-family:Georgia, 'Times New Roman', Times, serif;float: left;font-size:small;color:rgb(191, 223, 49);">Password:</label>
+            <input type="password" style="font-size: small;" class="form-control"  placeholder="Password" required name="password">
+    
+        <button class="btns" style="font-family: Georgia, 'Times New Roman', Times, serif;font-size:large" type="submit">LogIn</button>
+        
+    </form>
+    </div>
+   </div>  
+    <a href="/register" class="text-center new-account">new</a>
+    
+</body>
+</html>
