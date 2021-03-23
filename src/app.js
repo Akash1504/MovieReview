@@ -87,17 +87,81 @@ app.get("/secret",auth,(req,res)=>{
 
 
 //User Registration
+// app.post("/register",async(req,res)=>{
+//     try {
+//         const password=req.body.password;
+//         const confirmpassword=req.body.confirmpassword;
+//         if(password===confirmpassword)
+//         {
+//                 const registerEmployee=new Register({
+//                     firstname:req.body.firstname,
+//                     lastname:req.body.lastname,
+//                     password:password,
+//                     confirmpassword:confirmpassword,
+//                     gender:req.body.gender,
+//                     email:req.body.email,
+//                     phone:req.body.phone,
+//                     role:req.body.role
+                    
+//                  })
+                
+//                 const token=await registerEmployee.generateAuthToken();
+//                 res.cookie("jwt",token,{expires:new Date(Date.now() + 50000),httpOnly:true});
+//                 const registered=await registerEmployee.save();
+//                  res.status(201).render("index");
+//         }
+//         else{
+//             res.send("Not match");
+//         }
+
+//     } catch (error) {
+//         res.status(400).send(error);
+//     }
+// })
+
+
+//work
 app.post("/register",async(req,res)=>{
-    try {
-        const password=req.body.password;
-        const confirmpassword=req.body.confirmpassword;
-        if(password===confirmpassword)
-        {
+    try{
+    let errors=[];
+    if(req.body.password!==req.body.confirmpassword)
+    {
+        errors.push({text:'Not Match'});
+    }
+    if(errors.length>0)
+    {
+        res.render("register",{
+            errors:errors,
+            title:'Error',
+            firstname:req.body.firstname,
+                                 lastname:req.body.lastname,
+                                 password:req.body.password,
+                                 confirmpassword:req.body.confirmpassword,
+                                 gender:req.body.gender,
+                                 email:req.body.email,
+                                 phone:req.body.phone,
+                                 role:req.body.role
+        });
+    }
+    else
+    {
+        Register.findOne({email:req.body.email}).exec( async function(error,user) {
+            if(user)
+            {         console.log(user);
+                        let errors=[];
+                        errors.push({text:'Email duplicae'});
+                        res.render("register",{
+                            title:'signup',
+                            errors:errors
+                        })
+            }
+            else
+            {
                 const registerEmployee=new Register({
                     firstname:req.body.firstname,
                     lastname:req.body.lastname,
-                    password:password,
-                    confirmpassword:confirmpassword,
+                    password:req.body.password,
+                    confirmpassword:req.body.confirmpassword,
                     gender:req.body.gender,
                     email:req.body.email,
                     phone:req.body.phone,
@@ -109,16 +173,13 @@ app.post("/register",async(req,res)=>{
                 res.cookie("jwt",token,{expires:new Date(Date.now() + 50000),httpOnly:true});
                 const registered=await registerEmployee.save();
                  res.status(201).render("index");
-        }
-        else{
-            res.send("Not match");
-        }
+            }
+        })
+    }}
+    catch(error) {
 
-    } catch (error) {
-        res.status(400).send(error);
     }
-})
-
+});
 
 
 //User Update
@@ -257,7 +318,7 @@ app.post('/addmovie',async(req,res )=>{
 
 
 
-app.get('/movielist', (req,res) => {
+app.get('/movielist',auth, (req,res) => {
     Movie.find((err, docs) => {
         if(err){
                 console.log(err);

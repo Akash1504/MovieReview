@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="./login.hbs">
  <style>
 	 footer {
     display: flex;
@@ -18,11 +19,18 @@
 
 	{{>header}}
   </head>
-  <body class="tm-gray-bg">
-  
-	{{>navbar}}
-	<!-- Banner -->
 
+  <body class="tm-gray-bg">
+ 	<div class="topnav" >
+                  <a class="active" href="/"><i class="fa fa-fw fa-home"></i>Home</a>
+
+                   <a class="nav-link" href="/register"><i class='fas fa-plus'></i>Register</a>
+               
+          <a class="nav-link" href="/login"><i class="fa fa-fw fa-user"></i>Login</a>
+		<a class="nav-link" href="/movielist"><i class="fa fa-fw fa-film"></i>Movies</a>
+		
+                </li>
+    </div>
 	<section class="tm-banner">
 		<!-- Flexslider -->
 		<div class="flexslider flexslider-banner">
@@ -137,7 +145,7 @@
 	</section>		
 	
 	
-		<footer class="tm-black-bg" style="position:absolute;top:1550px;height: 50px;width:1350px">
+		<footer class="tm-black-bg" style="position:absolute;top:1550px;height: 50px;width:1350px;background-color:rgb(204, 82, 82)">
 		
 			<div>
 				<p style="position:absolute;left:50%;padding:10px;">Copyright &copy; 2021 AS pvt.ltd</p>
