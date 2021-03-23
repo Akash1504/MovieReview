@@ -16,7 +16,7 @@ const auth=async (req,res,next)=>{
             next();
 
         } catch (error) {
-            res.status(401).send("plz login");
+            res.render("login",{msg:'LogIn First'});
         }
 }
 

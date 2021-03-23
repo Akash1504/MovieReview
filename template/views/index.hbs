@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="./login.hbs">
+
  <style>
 	 footer {
     display: flex;
@@ -14,22 +14,29 @@
     color: #fff;
 }
  </style>
-
+	
 
 
 	{{>header}}
   </head>
 
   <body class="tm-gray-bg">
+	 
+	  
  	<div class="topnav" >
                   <a class="active" href="/"><i class="fa fa-fw fa-home"></i>Home</a>
 
                    <a class="nav-link" href="/register"><i class='fas fa-plus'></i>Register</a>
                
           <a class="nav-link" href="/login"><i class="fa fa-fw fa-user"></i>Login</a>
+		  <a class="nav-link" href="/contact"><i class="fa fa-phone-square" ></i>Contact</a>
 		<a class="nav-link" href="/movielist"><i class="fa fa-fw fa-film"></i>Movies</a>
 		
                 </li>
+    </div>
+	<div class="alert ">
+         {{msg}}
+		<button type="button" class="close" data-dismiss="alert" style="color: red;">&times;</button>			 
     </div>
 	<section class="tm-banner">
 		<!-- Flexslider -->

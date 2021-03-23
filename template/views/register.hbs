@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Document</title>
+<script type="text/javascript" src="../js/regi.js"></script>
     
  
     {{>header}}
@@ -18,7 +17,7 @@
         
        <div  class="container p-3 my-3 bg-dark text-white ">
            
-              <form action="/register" method="POST">
+              <form name="RegForm" action="/register" onsubmit="return USER()" method="POST">
               {{#each errors}}
               <div class="alert alert-danger" style="position: absolute;top:2%;left:29%;width:63%;height:8%;color:red;font-size:large;">
                     <a href="/register" class="close" data-dismis="alert" aria-label="close">&times;</a>

@@ -150,10 +150,7 @@ app.post("/register",async(req,res)=>{
             {         console.log(user);
                         let errors=[];
                         errors.push({text:'Email duplicae'});
-                        res.render("register",{
-                            title:'signup',
-                            errors:errors
-                        })
+                        res.render("register",{title:'signup',errors:errors})
             }
             else
             {
@@ -172,7 +169,7 @@ app.post("/register",async(req,res)=>{
                 const token=await registerEmployee.generateAuthToken();
                 res.cookie("jwt",token,{expires:new Date(Date.now() + 50000),httpOnly:true});
                 const registered=await registerEmployee.save();
-                 res.status(201).render("index");
+                 res.status(201).render("index",{msg:req.body.firstname+'Registered successfullyyy..'});
             }
         })
     }}
