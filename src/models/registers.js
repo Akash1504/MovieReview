@@ -54,7 +54,7 @@ employeeSchema.methods.generateAuthToken=async function(){
         await this.save();
             return token;
     } catch (error) {
-        
+        res.send(error);
     }
 }
 

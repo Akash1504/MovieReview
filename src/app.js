@@ -5,7 +5,7 @@ const bcrypt=require('bcrypt');
 const path=require("path");
 const app=express();
 const mongoose = require('mongoose');
-
+var cookieParser=require("cookie-parser");
 const bodyParser=require("body-parser");
 require("./db/conn");
 const hbs=require("hbs");
@@ -21,10 +21,11 @@ const port=process.env.PORT || 3000;
 const static_path=path.join(__dirname,"../public");
 const template_path=path.join(__dirname,"../template/views");
 const partials_path=path.join(__dirname,"../template/partials");
-
+const auth=require("./middleware/auth");
 //we have the index.html path here
 app.use(express.static(static_path));
 
+app.use(cookieParser());
 //we have the index.hbs path here
 app.set("view engine","hbs");
 
@@ -55,6 +56,8 @@ app.use(express.json());
 
 //  var upload=multer({storage:storage});
 
+
+
 app.get("/",(req,res)=>{
     res.render("index");
 });
@@ -77,6 +80,10 @@ app.get("/contact",(req,res)=>{
     res.render("contact");
 })
 
+app.get("/secret",auth,(req,res)=>{
+    console.log(req.cookies.jwt);
+    res.render("secret");
+})
 
 
 //User Registration
@@ -99,7 +106,8 @@ app.post("/register",async(req,res)=>{
                  })
                 
                 const token=await registerEmployee.generateAuthToken();
-                 const registered=await registerEmployee.save();
+                res.cookie("jwt",token,{expires:new Date(Date.now() + 50000),httpOnly:true});
+                const registered=await registerEmployee.save();
                  res.status(201).render("index");
         }
         else{
@@ -167,6 +175,8 @@ app.post("/login",async(req,res)=>{
 
         const isMatch=await bcrypt.compare(password,usermail.password);
         const token=await usermail.generateAuthToken();
+        res.cookie("jwt",token,{expires:new Date(Date.now() + 600000),httpOnly:true});
+            
 
         if(isMatch && usermail.role == role)
         {
@@ -186,6 +196,22 @@ app.post("/login",async(req,res)=>{
         res.render("login", {viewTitle: 'Invalid Email....'});
     }
 })
+//logout
+app.get('/logout',auth,async(req,res)=>{
+    try {
+        req.user.tokens=req.user.tokens.filter((token)=>{
+            
+        return token.token !== req.token
+        })
+        res.clearCookie("jwt");
+        await req.user.save();
+        res.render("login");
+    } catch (error) {
+        res.status(400).send(error);
+    }
+})
+
+
 
 // app.get('/list',async(req,res)=>{
 //     await Register.find((err,doc)=>{
@@ -199,7 +225,7 @@ app.post("/login",async(req,res)=>{
 //         }
 //     })
 // })
-app.get('/list', (req,res) => {
+app.get('/list',auth, (req,res) => {
     Register.find((err, docs) => {
     if(!err){
     res.render("list", {
