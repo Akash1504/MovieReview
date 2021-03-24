@@ -73,45 +73,57 @@ body {
     </div>
     <div class="bg-imggg">
     <table border="1" class="table table-bordered">
-      <thead style="text-align:center;background-color: coral;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: xx-large; ">
+      
+      <thead style="text-align:center;background-color: coral;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: x-large;height:14% ">
         <tr>
-            <th>Movie Name</th>
+            <th>Movie </th>
             <th>Comments</th>
             <th>Ratings</th>
+            <th>Avg Rat</th>
+            
          
         </tr>
        </thead>
         <tbody style="background-color: rgb(85, 87, 87);">
         {{#result}}
         <tr>
-           <td style="font-size: xx-large;color:rgb(247, 240, 240);text-align:center ">{{name}}</td>
-          <td style="font-size: large;color:rgb(247, 240, 240)">
+           <td style="font-size: xx-large;color:rgb(247, 240, 240);text-align:center;width:25% ">{{name}}</td>
+          <td style="font-size: large;color:rgb(247, 240, 240);width:47%">
              <ol style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
                   {{#each comments}}
                     <li>{{text}}
                     
-            <a href="/deletecom/{{this._id}}" style="color:red" onclick="return confirm('Are you sure to delete this record ?');" ><i class="fa fa-trash-o" style="position:absolute;left:840px;font-size: 21px;"> </i></a>
-            <a href="/updatecom/{{this._id}}" style="color: rgb(28, 175, 9);"><i class="fa fa-edit" style="position:absolute;left:880px;font-size: 21px;"></i></a>
+            <a href="/deletecom/{{this._id}}" style="color:red" onclick="return confirm('Are you sure to delete this record ?');" ><i class="fa fa-trash-o" style="position:absolute;left:820px;font-size: 21px;"> </i></a>
+            <a href="/updatecom/{{this._id}}" style="color: rgb(28, 175, 9);"><i class="fa fa-edit" style="position:absolute;left:860px;font-size: 21px;"></i></a>
                    
                 </li>
                    {{/each}}
              </ol>
            </td>
-           <td style="font-size: large;color:rgb(247, 240, 240)">
+     
+           <td style="font-size: large;color:rgb(247, 240, 240);">
              <ol style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
                   {{#each comments}}
                     <li>{{rating}}
-                       <a href="/deletecom/{{this._id}}" style="color:red" onclick="return confirm('Are you sure to delete this record ?');" ><i class="fa fa-trash-o" style="position:absolute;left:1250px;font-size: 21px;"> </i></a>
-                       <a href="/updatecom/{{this._id}}" style="color: rgb(28, 175, 9);"><i class="fa fa-edit" style="position:absolute;left:1290px;font-size: 21px;"></i></a>
+                      <a href="/deletecom/{{this._id}}" style="color:red" onclick="return confirm('Are you sure to delete this record ?');" ><i class="fa fa-trash-o" style="position:absolute;left:1080px;font-size: 21px;"> </i></a>
+                       <a href="/updatecom/{{this._id}}" style="color: rgb(28, 175, 9);"><i class="fa fa-edit" style="position:absolute;left:1100px;font-size: 21px;"></i></a>
+                   
                     </li>
 
                   {{/each}}
              </ol>
            </td>
+           <td>
+               {{!-- <button<a href="/avgcomnt/{{this._id}}"></a>>Average</button> --}}
+            <button onclick="location.href='/avgcomnt/{{this._id}}'" type="menu" style="width:45%;height:20%"></button>
+           </td>
           </tr>
-        {{/result}}
+              {{/result}}
+                    
      </tbody>
   </table>
     </div>
 </body>
+
+ 
 </html>

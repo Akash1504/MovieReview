@@ -32,4 +32,14 @@ const Comment = new Schema(
     
  });
 
+// Comment.statics.alAvg=function(id){
+//     this.aggregate([
+//         {
+//             $group:{
+//                 rating:{$avg:rating}
+//             }
+//         }
+//     ])
+// }
+
 module.exports = mongoose.model('Comment', Comment)

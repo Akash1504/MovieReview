@@ -386,22 +386,42 @@ app.get('/deletemov/:id', async(req, res) => {
 
 
 });
-    
-
-   
-
+ //to get the all table of cpmmlist page   
 app.get('/getmovie/:id',(req,res)=>{
-
-   Movie.findOne({_id:req.params.id})
-        .populate({path:'comments',select:'text rating _id'})
-        .then((result)=>{
-             res.render("cpmmlist", {result: result});
+   
+     Movie.findOne({_id:req.params.id})
+            .populate({path:'comments',select:'text rating _id'})
+            .then((result)=>{res.render("cpmmlist", {result: result});}).catch((error)=>{res.status(400).send(error) })
             
-        }).catch((error)=>{res.status(400).send(error) })
-         
     });
-    
-  
+   
+   
+ app.get('/avgcomnt/:id',(req,res)=>{
+    var id = req.params.id;
+    Comment.aggregate(
+        [
+            {
+                $group:
+                {
+                    _id:id,
+                    rating:
+                    {
+                        $avg:"$rating"
+                       
+                    }
+                    
+                }
+            } 
+            
+        ],function(err, result) {
+
+            console.log(result);
+             res.render("avgcomt", {result: result});
+           
+            
+        }
+        )
+ }); 
     
     app.post('/addcomment',(req,res)=>{
     const comment=new Comment();
