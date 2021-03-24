@@ -227,23 +227,25 @@ app.post("/login",async(req,res)=>{
     try {
         const email=req.body.email;
         const password=req.body.password;
-        const role='admin'; 
+        const role='vendor'; 
 
         const usermail=await Register.findOne({email:email});
 
         const isMatch=await bcrypt.compare(password,usermail.password);
+        console.log(isMatch);
         const token=await usermail.generateAuthToken();
         res.cookie("jwt",token,{expires:new Date(Date.now() + 600000),httpOnly:true});
             
 
         if(isMatch && usermail.role == role)
         {
-            
-            res.status(201).render("admin");
-        }
-        else if(usermail.password == password)
-        {
             res.status(201).render("movuser");
+           
+        }
+        else if(isMatch)
+        {
+           
+            res.status(201).render("admin");
         }
       
         else
