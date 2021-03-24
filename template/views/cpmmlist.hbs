@@ -9,6 +9,47 @@
    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> 
    
     <style>
+      .button {
+        position: absolute;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+
+  font-size: 28px;
+  padding: 10px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
 
      .bg-imggg {
     
@@ -115,7 +156,9 @@ body {
            </td>
            <td>
                {{!-- <button<a href="/avgcomnt/{{this._id}}"></a>>Average</button> --}}
-            <button onclick="location.href='/avgcomnt/{{this._id}}'" type="menu" style="width:45%;height:20%"></button>
+            {{!-- <button onclick="location.href='/avgcomnt/{{this._id}}'" type="menu" style="width:45%;height:20%"></button>
+           --}}
+<button onclick="location.href='/avgcomnt/{{this._id}}'" class="button"  style="vertical-align:middle"><span>Hover </span></button>
            </td>
           </tr>
               {{/result}}
