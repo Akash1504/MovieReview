@@ -9,9 +9,11 @@ var cookieParser=require("cookie-parser");
 const bodyParser=require("body-parser");
 require("./db/conn");
 const hbs=require("hbs");
+const ejs=require("ejs");
 const Register=require("./models/registers");
 const Movie=require("./models/movie-model");
 const Comment=require("./models/Comment");
+const Upcoming=require("./models/upcomingmovie");
 const { text } = require("body-parser");
 const { Mongoose } = require("mongoose");
  const fs=require('fs-extra');
@@ -28,6 +30,7 @@ app.use(express.static(static_path));
 app.use(cookieParser());
 //we have the index.hbs path here
 app.set("view engine","hbs");
+app.set("view engine", "ejs");
 
 //telling to exxpress thepath of views
 app.set("views",template_path);
@@ -39,50 +42,86 @@ app.use(express.json());
 
 
 
-//  const storage=multer.diskStorage({
-//      destination:(req,file,cb)=>{
-//          cb(null,'uploads')
-//      },
-//      filename:(req,file,cb)=>{
-//          cb(null,file.filename + '-' + Date.now())
-//      }
-//  });
-// const storage=multer.diskStorage({
-//     destination:'public/uploads/',
-//     filename:(req,file,cb)=>{
-//         cb(null,file.filename + '-' + Date.now())
+
+const storage=multer.diskStorage({
+    destination:'src/uploads/',
+    filename:(req,file,cb)=>{
+        cb(null,file.filename + '-' + Date.now())
+    }
+});
+
+// var storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads')
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.filename + '-' + Date.now())
 //     }
 // });
+ 
+var upload = multer({ storage: storage });
 
-//  var upload=multer({storage:storage});
+//get image-upcoming movie
+app.get('/upcominglist', (req, res) => {
+    Upcoming.find({}, (err, items) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('An error occurred', err);
+        }
+        else {
+            res.render('upcominglist.ejs', { items: items });
+        }
+    });
+});
+//add upcoming movies
+app.post('/addupcoming', upload.single('image'), (req, res, next) => {
+ 
+    var obj = {
+        name: req.body.name,
+        date: req.body.date,
+        img: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: 'image/jpg'
+        }
+    }
+    Upcoming.create(obj, (err, item) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+           
+            res.redirect('/upcoming');
+        }
+    });
+});
+
+
 
 
 
 app.get("/",(req,res)=>{
-    res.render("index");
+    res.render("index.hbs");
 });
-
-
 app.get("/register",(req,res)=>{
-    res.render("register");
+    res.render("register.hbs");
 })
 
 app.get("/addmovie",(req,res)=>{
-    res.render("addmovie");
+    res.render("addmovie.hbs");
 })
 app.get("/addcomment",(req,res)=>{
-    res.render("addcomment");
+    res.render("addcomment.hbs");
 })
 app.get("/login",(req,res)=>{
     res.render("login");
 })
 app.get("/contact",(req,res)=>{
-    res.render("contact");
+    res.render("contact.hbs");
 })
 
-app.get("/secret",auth,(req,res)=>{
-    console.log(req.cookies.jwt);
-    res.render("secret");
+app.get("/upcoming",(req,res)=>{
+  
+    res.render("upcoming.ejs");
 })
 
 
@@ -150,7 +189,7 @@ app.post("/register",async(req,res)=>{
             {         console.log(user);
                         let errors=[];
                         errors.push({text:'Email duplicae'});
-                        res.render("register",{title:'signup',errors:errors})
+                        res.render("register.hbs",{title:'signup',errors:errors})
             }
             else
             {
@@ -169,7 +208,7 @@ app.post("/register",async(req,res)=>{
                 const token=await registerEmployee.generateAuthToken();
                 res.cookie("jwt",token,{expires:new Date(Date.now() + 50000),httpOnly:true});
                 const registered=await registerEmployee.save();
-                 res.status(201).render("index",{msg:req.body.firstname+'Registered successfullyyy..'});
+                 res.status(201).render("index.hbs",{msg:req.body.firstname+'Registered successfullyyy..'});
             }
         })
     }}
@@ -239,21 +278,21 @@ app.post("/login",async(req,res)=>{
 
         if(isMatch && usermail.role == role)
         {
-            res.status(201).render("movuser");
+            res.status(201).render("movuser.hbs");
            
         }
         else if(isMatch)
         {
            
-            res.status(201).render("admin");
+            res.status(201).render("admin.hbs");
         }
       
         else
         {
-            res.render("login", {viewTitle: 'Invalid Password....'});
+            res.render("login.hbs", {viewTitle: 'Invalid Password....'});
         }
     } catch (error) {
-        res.render("login", {viewTitle: 'Invalid Email....'});
+        res.render("login.hbs", {viewTitle: 'Invalid Email....'});
     }
 })
 //logout
@@ -288,9 +327,7 @@ app.get('/logout',auth,async(req,res)=>{
 app.get('/list',auth, (req,res) => {
     Register.find((err, docs) => {
     if(!err){
-    res.render("list", {
-    list: docs
-    });
+    res.render("list.hbs", {list: docs});
     }
     else {
     console.log('Failed to retrieve the Course List: '+ err);
@@ -323,7 +360,7 @@ app.get('/movielist',auth, (req,res) => {
                 console.log(err);
                 }
          else{
-            res.render("movielist", {movielist: docs });
+            res.render("movielist.hbs", {movielist: docs });
              }
     });
 

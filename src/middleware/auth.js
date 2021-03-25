@@ -16,7 +16,7 @@ const auth=async (req,res,next)=>{
             next();
 
         } catch (error) {
-            res.render("login",{msg:'LogIn First'});
+            res.render("login.hbs",{msg:'LogIn First'});
         }
 }
 
