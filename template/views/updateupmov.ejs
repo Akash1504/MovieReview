@@ -98,7 +98,7 @@ body {
 
 	</style>
 </head>
-<body>
+ <body>
 	<div class="topnav" >
 		<a class="active" href="/"><i class="fa fa-fw fa-home"></i>Home</a>
 
@@ -116,35 +116,24 @@ body {
 		<img src="../img/login.jpg" style="position: absolute;height: 95%;right: 0%;" >
 	</div>
 	<div class="container" style="color: rgba(29, 2, 2, 0.966);font-weight: bold;">
-		<form action="/addupcoming" method="POST" enctype="multipart/form-data">
+		<form action='/updateupmovlist' method="POST">
+			 <input type="hidden" name="_id" value="<%=movies._id%>">
 			<div style="position: absolute;width: 140%;top:18px;left:3%"  >
 				<label for="name" >Movie Name</label>
-				<input style="padding: 10px;width: 40%;background-color: rgb(219, 218, 215);" type="text" id="name" placeholder="Name" value="" name="name" required>
+				<input style="padding: 10px;width: 40%;background-color: rgb(219, 218, 215);" type="text"  placeholder="Name" value="<%=movies.name%>" name="name" required>
 			</div>
 			<div style="position: absolute;width: 140%;top:36%;left:14% "  >
-				<label for="date">Date</label>
-				<input  style="padding: 10px;width: 40%;background-color: rgb(219, 218, 215);" type="text" id="date" name="date" value="" rows="2" placeholder="Date" required>
+				<label for="desc">Date</label>
+				<input  style="padding: 10px;width: 40%;background-color: rgb(219, 218, 215);" type="text"  name="date" value="<%=movies.date%>" rows="2" placeholder="Date" required>
 			</input>
 			</div>
-			<div style="position: absolute;top:60%;left:1% ;" >
-				<label for="image">Upload Image</label>
-				<input style="width: 60%;" type="file" id="image" name="image" value="" required>
-			</div>
-			<div style="position: absolute; top:80%;left:30%;" >
+			
+            <div style="position: absolute; top:80%;left:30%;" >
 				<button type="submit" class="button"><span>Submit</span></button>
 			</div>
 		</form>
 
 </div>
 </div>
-	<!-- <div style="background-color: rgb(221, 15, 15);">
-	
-	<button onclick="location.href='/upcominglist'" class="button" ><span>Hover </span></button>
- 
-
-	</div> -->
-
 </body>
 </html>
-
- 

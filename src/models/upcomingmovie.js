@@ -1,9 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const Upcoming = new Schema(
+const upcoming = new Schema(
     {
-       
         name: 
             {
              type: String, 
@@ -20,14 +19,8 @@ const Upcoming = new Schema(
                 contentType:String
             }
         
-    },
-  
-    {
-         toJSON:{
-                    virtuals:true,
-                },
-        
-
     });
 
-module.exports = mongoose.model('upcoming', Upcoming)
+const Upcoming =new mongoose.model('Upcoming', upcoming)
+
+module.exports=Upcoming;

@@ -6,6 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    {{>header}}
     <style>
+        .button {
+        position: absolute;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+
+  font-size: 28px;
+  padding: 10px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
             h1{
                 position: absolute;
                 top: 10%;
@@ -15,7 +56,7 @@
                
                }
                .img{
-                    background-image: url("../img/the-amazing-spider-man-2.jpg");
+                    background-image: url("../img/tFZviR.jpg");
                     min-height: 700px;
                     background-position: center;
                     background-repeat: no-repeat;
@@ -27,27 +68,43 @@
 {{>navbar}}
    
 <body>
+
 <div class="img">
-    <div style="background-color: rgb(85, 81, 85);height:100px">
-            <h1 style="font-size: 60px;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;left:270px;color:rgb(15, 14, 15)">WELCOME TO MOVIE HUB</h1>
+    <div style="background-color: rgb(27, 25, 27);height:100px">
+            <h1 style="font-size: 60px;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;left:270px;color:rgb(153, 151, 156)">WELCOME TO MOVIE HUB</h1>
      </div>
          <div style="width: 100%;margin-top:0%">
-              
-                <div style="margin-left: 50%;height:380px;;border-style:solid;border-width:20px;border-color:rgb(165, 146, 146)">
-                    <a class="nav-link" href="/user">  
-                        <img src="../../img/movie-vector-trendy-banner_36298-505.jpg" width="620" height="325" >
-                        <div style="position: absolute;top:68%;left:77%;transform:translate(-50%,-50%);font-size:60px;background-color:rgb(14, 13, 13);color:rgb(206, 194, 194);">MovieList</div>
-                    </a>
+                <div style="width: 50%;float:left;height:350;border-style:solid;border-width:3px;border-color:rgb(131, 131, 127)">
+                  <button onclick="location.href='/user'" class="button"  style="vertical-align:middle;top:63%;left:20%"><span>MovieList</span></button>
+  
+                    <a class="nav-link" href="/user">
+                        <img src="../../img/wallpaper2you_147292.jpg" width="647" height="325" >
+                   </a>
                 </div>
-                <div style="width: 50%;height:380px;border-style:solid;border-width:20px;border-color:rgb(165, 146, 146)">
+                 <div style="margin-left: 50%;height:350;border-style:solid;border-width:3px;border-color:rgb(131, 131, 127)">
+                    <button onclick="location.href='/upcomingmovielistuser'" class="button"  style="vertical-align:middle;top:63%;left:70%"><span>Upcoming</span></button>
+    
+                    <a class="nav-link" href="/upcomingmovielistuser">  
+                        <img src="../../img/movie-vector-trendy-banner_36298-505.jpg" width="647" height="325" >
+                   </a>
+                </div>
+            </div>
+            <div >
+                <div style="width: 50%;float:left;height:350;border-style:solid;border-width:3px;border-color:rgb(131, 131, 127)">
+                     <button onclick="location.href='/addcomment'" class="button"  style="vertical-align:middle;top:114%;left:20%"><span>Comment</span></button>
+    
                     <a class="nav-link" href="/addcomment">
-                        <img src="../../img/wallpaper2you_147360.jpg" width="620" height="325" >
-                        <div style="position: absolute;top:126%;left:25%;transform:translate(-50%,-50%);font-size:60px;background-color:rgb(12, 11, 12);color:rgb(206, 194, 194);">AddComment</div>
+                        <img src="../../img/wallpaper2you_147360.jpg" width="647" height="325" >
+                   </a>
+                </div>
+                <div style="margin-left: 50%;height:350;border-style:solid;border-width:3px;border-color:rgb(131, 131, 127)">
+                       <button onclick="location.href='/trailer'" class="button"  style="vertical-align:middle;top:114%;left:70%"><span>Trailers</span></button>
+     
+                    <a class="nav-link" href="/trailer">
+                        <img src="../../img/the-twilight-saga-breaking-dawn-part-2.jpeg" width="647" height="325" >
                     </a>
                 </div>
             </div>
-           
-        
 </div>
 </body>
 </html>
