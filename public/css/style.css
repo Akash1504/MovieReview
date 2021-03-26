@@ -10,9 +10,9 @@ body, html {
 
 .bg-img {
   /* The image used */
-  background-image: url("../img/Spider-man-3-wallpaper.jpg");
+  background-image: url("../img/zach-savinar-mFYm4SZjmCY-unsplash.jpg");
 
-  min-height: 850px;
+  min-height: 700px;
   
 
   /* Center and scale the image nicely */
@@ -27,13 +27,13 @@ body, html {
 div.container {
   position: absolute;
 
-  top: 60px;
+  top: 70px;
   left:15%;
 width: 70%;
 height: 100%;
 border-style: solid;
 border-color: rgb(243, 233, 233);
-background-color: rgb(59, 56, 56);
+
 }
 
 /* Full-width input fields */
