@@ -14,6 +14,7 @@ const Register=require("./models/registers");
 const Movie=require("./models/movie-model");
 const Comment=require("./models/Comment");
 const Upcoming=require("./models/upcomingmovie");
+const Contact=require("./models/contactus");
 
 const { text } = require("body-parser");
 const { Mongoose } = require("mongoose");
@@ -45,18 +46,24 @@ app.use(express.json());
 
 
 
+// const storage=multer.diskStorage({
+//     destination:'src/uploads/',
+//     filename:(req,file,cb)=>{
+//         cb(null,file.filename + '-' + Date.now())
+//     }
+// });
 const storage=multer.diskStorage({
-    destination:'src/uploads/',
+    destination:'public/uploads/',
     filename:(req,file,cb)=>{
-        cb(null,file.filename + '-' + Date.now())
+        cb(null,file.fieldname + '-' + Date.now()+path.extname(file.originalname))
     }
 });
 
 
  
-var upload = multer({ storage: storage });
+var upload = multer({ storage: storage }).single('file');
 
-//get image-upcoming movie
+//get image-upcoming movie--working
 app.get('/upcominglist', (req, res) => {
     Upcoming.find({}, (err, items) => {
         if (err) {
@@ -68,6 +75,7 @@ app.get('/upcominglist', (req, res) => {
         }
     });
 });
+
 app.get('/upcomingmovielistuser', (req, res) => {
     Upcoming.find({}, (err, items) => {
         if (err) {
@@ -80,16 +88,34 @@ app.get('/upcomingmovielistuser', (req, res) => {
     });
 });
 
-//add upcoming movies
-app.post('/addupcoming',upload.single('image'),async(req,res )=>{
+//add upcoming movies--working
+// app.post('/addupcoming',upload.single('image'),async(req,res )=>{
+//     try {
+//            const addNewMovie=new Upcoming({
+//                     name:req.body.name,
+//                     date:req.body.date,
+//                     img: {
+//                         data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+//                         contentType: 'image/jpg'
+//                     }
+                    
+//                  }
+                 
+//                  )
+//                  const added=await addNewMovie.save();
+//                  res.status(201).render("upcoming");
+      
+
+//     } catch (error) {
+//         res.status(400).send(error);
+//     }
+// })
+app.post('/addupcoming',upload,async(req,res )=>{
     try {
            const addNewMovie=new Upcoming({
                     name:req.body.name,
                     date:req.body.date,
-                    img: {
-                        data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-                        contentType: 'image/jpg'
-                    }
+                    image:req.file.filename,
                     
                  }
                  
@@ -102,26 +128,8 @@ app.post('/addupcoming',upload.single('image'),async(req,res )=>{
         res.status(400).send(error);
     }
 })
-// app.post('/addupcoming', upload.single('image'), (req, res, next) => {
- 
-//     var obj = {
-//         name: req.body.name,
-//         date: req.body.date,
-//         img: {
-//             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-//             contentType: 'image/jpg'
-//         }
-//     }
-//     Upcoming.create(obj, (err, item) => {
-//         if (err) {
-//             console.log(err);
-//         }
-//         else {
-           
-//             res.redirect('upcoming');
-//         }
-//     });
-// });
+
+
 //update upcoming movie list
 app.get('/updateupmov/:id',(req, res) => {
 
@@ -133,27 +141,46 @@ app.get('/updateupmov/:id',(req, res) => {
       }
       else 
       {
-        console.log(user);
+        
             res.render("updateupmov.ejs", {movies: user});
       }
     });
 })
-app.post('/updateupmovlist',(req, res) => {
-   
-    Upcoming.findByIdAndUpdate({_id:req.body._id}, req.body, { new: true }, (err, doc) => {
 
-        if (!err)
-     { 
-          
-             res.redirect('upcominglist');
-    }
-    else 
+app.post('/updateupmovlist',upload,(req, res) => {
+   
+    if(req.file)
     {
-        console.log(err);
-            res.render("updateupmov.ejs", {viewTitle: 'Update User Details',movies: req.body});
-           
+        Upcoming.findByIdAndUpdate(req.body._id, { $set: { 
+            name:req.body.name,
+            date:req.body.date,
+            image:req.file.filename
+         
+       }}, { new: true }, function (err, employee) {
+                if (err) 
+                {
+                
+                res.render("updateupmov.ejs", {movies: req.body});
+                }
+                res.redirect('upcominglist');
+            });
     }
-    });
+    else
+    {
+        Upcoming.findByIdAndUpdate(req.body._id, { $set: { 
+                         name:req.body.name,
+                         date:req.body.date,
+                      
+                    }}, { new: true }, function (err, employee) {
+                  if (err) 
+                  {
+                    
+                    res.render("updateupmov.ejs", {movies: req.body});
+                  }
+                  res.redirect('upcominglist');
+                });
+    }
+    
     });
 
     app.get('/deleteup/:id', async(req, res) => {
@@ -413,6 +440,56 @@ app.get('/list',auth, (req,res) => {
     }
     });
     });
+    //****************contact***********************
+    app.post('/addcontact',async(req,res )=>{
+        try {
+               const addContact=new Contact({
+                        name:req.body.name,
+                        email:req.body.email,
+                        subject:req.body.subject,
+                        message:req.body.message
+                        
+                     }
+                     
+                     )
+                     const added=await addContact.save();
+                     res.status(201).render("contactlist.hbs");
+          
+    
+        } catch (error) {
+            res.status(400).send(error);
+        }
+    })
+    
+    app.get('/contactlist', (req,res) => {
+        Contact.find((err, docs) => {
+            if(err){
+                    console.log(err);
+                    }
+             else{
+                console.log(err);
+                res.render("contactlist.hbs", {contactlist: docs });
+                 }
+        });
+    
+        });
+//delete
+app.get('/deletecontact/:id', async(req, res) => {
+        
+    Contact.findByIdAndRemove(req.params.id, (err, doc) => {
+        if (!err)
+        {
+            res.redirect('/contactlist');
+        }
+        else 
+        { 
+            console.log('Failed to Delete user Details: ' + err);
+         }
+        });
+
+
+});
+    
 // ***************************Movie*******************
 app.post('/addmovie',async(req,res )=>{
     try {

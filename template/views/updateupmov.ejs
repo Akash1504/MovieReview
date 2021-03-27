@@ -114,9 +114,12 @@ body {
 <div class="bgimg">
 	<div>	
 		<img src="../img/login.jpg" style="position: absolute;height: 95%;right: 0%;" >
+		<% if(movies.image){ %>
+			<img src="/uploads/<%=movies.image%>" style="position:absolute;right: 1px;;top:40%;height:300px;width: 500px;">   
+		   <% } %>
 	</div>
 	<div class="container" style="color: rgba(29, 2, 2, 0.966);font-weight: bold;">
-		<form action='/updateupmovlist' method="POST">
+		<form action='/updateupmovlist' method="POST" enctype="multipart/form-data">
 			 <input type="hidden" name="_id" value="<%=movies._id%>">
 			<div style="position: absolute;width: 140%;top:18px;left:3%"  >
 				<label for="name" >Movie Name</label>
@@ -126,6 +129,10 @@ body {
 				<label for="desc">Date</label>
 				<input  style="padding: 10px;width: 40%;background-color: rgb(219, 218, 215);" type="text"  name="date" value="<%=movies.date%>" rows="2" placeholder="Date" required>
 			</input>
+			</div>
+			<div style="position: absolute;top:60%;left:1% ;" >
+				<label for="image">Upload Image</label>
+				<input style="width: 60%;" type="file" id="image" name="file" value="">
 			</div>
 			
             <div style="position: absolute; top:80%;left:30%;" >

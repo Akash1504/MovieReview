@@ -48,19 +48,19 @@
 	  </li>
 </div>
     <div>
-        <% items.forEach(function(image) { %>
+        <% items.forEach(function(data) { %>
            <div >
             
             <div style="position:absolute;width: 40%;height:450px;left: 810px; margin-top:0px;background-color:rgb(236, 236, 57);">
-              <a href="/updateupmov/<%=image._id%>" style="color: rgb(5, 143, 97);">Update</a> 
-              <a href="/deleteup/<%=image._id%>" style="color: rgb(5, 143, 97);">Delete</a> 
-              <h5 style="position: absolute;left: 200px;top: 20%;font-size: xx-large;font-family:cursive;"><%= image.name %></h5>
-                  <p style="position: absolute;left: 180px;top: 40%;font-size: xx-large;font-family: Georgia, 'Times New Roman', Times, serif;">Date:<%= image.date %></p>
+              <a href="/updateupmov/<%=data._id%>" style="color: rgb(5, 143, 97);">Update</a> 
+              <a href="/deleteup/<%=data._id%>" style="color: rgb(5, 143, 97);">Delete</a> 
+              <h5 style="position: absolute;left: 200px;top: 20%;font-size: xx-large;font-family:cursive;"><%= data.name %></h5>
+                  <p style="position: absolute;left: 180px;top: 40%;font-size: xx-large;font-family: Georgia, 'Times New Roman', Times, serif;">Date:<%= data.date %></p>
             </div>       
             <div style="border-style: solid;border-width: 5px;border-color: rgb(15, 15, 15);border-top: none;border-left: none;border-right: none;" >
-                        <img style="height:450px;width: 810px;"  src="data:image/<%=image.img.contentType%>;base64,<%=image.img.data.toString('base64')%>">
-                       
-                      
+                      <% if(data.image){ %>
+                            <img src="./uploads/<%=data.image%>" style="height:450px;width: 810px;">   
+                   <% } %>
               </div>
                   
                   </div><% }) %>

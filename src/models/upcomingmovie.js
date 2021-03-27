@@ -13,12 +13,14 @@ const upcoming = new Schema(
                 type: String, 
                 required: true
             },
-            img:
-            {
-                data:Buffer,
-                contentType:String
-            }
-        
+            // img:
+            // {
+            //     data:Buffer,
+            //     contentType:String
+            // }
+        image:{
+            type:String
+        }
     });
 
 const Upcoming =new mongoose.model('Upcoming', upcoming)
