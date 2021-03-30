@@ -16,6 +16,10 @@ const Comment=require("./models/Comment");
 const Upcoming=require("./models/upcomingmovie");
 const Contact=require("./models/contactus");
 
+
+
+
+
 const { text } = require("body-parser");
 const { Mongoose } = require("mongoose");
  const fs=require('fs-extra');
@@ -46,12 +50,7 @@ app.use(express.json());
 
 
 
-// const storage=multer.diskStorage({
-//     destination:'src/uploads/',
-//     filename:(req,file,cb)=>{
-//         cb(null,file.filename + '-' + Date.now())
-//     }
-// });
+
 const storage=multer.diskStorage({
     destination:'public/uploads/',
     filename:(req,file,cb)=>{
@@ -224,45 +223,19 @@ app.get("/login",(req,res)=>{
 app.get("/contact",(req,res)=>{
     res.render("contact.hbs");
 })
+app.get("/trailers",(req,res)=>{
+    res.render("trailers.hbs");
+})
 
 app.get("/upcoming",(req,res)=>{
   
     res.render("upcoming.ejs");
 })
-
+app.get("/about",(req,res)=>{
+    res.render("about.hbs")
+})
 
 //User Registration
-// app.post("/register",async(req,res)=>{
-//     try {
-//         const password=req.body.password;
-//         const confirmpassword=req.body.confirmpassword;
-//         if(password===confirmpassword)
-//         {
-//                 const registerEmployee=new Register({
-//                     firstname:req.body.firstname,
-//                     lastname:req.body.lastname,
-//                     password:password,
-//                     confirmpassword:confirmpassword,
-//                     gender:req.body.gender,
-//                     email:req.body.email,
-//                     phone:req.body.phone,
-//                     role:req.body.role
-                    
-//                  })
-                
-//                 const token=await registerEmployee.generateAuthToken();
-//                 res.cookie("jwt",token,{expires:new Date(Date.now() + 50000),httpOnly:true});
-//                 const registered=await registerEmployee.save();
-//                  res.status(201).render("index");
-//         }
-//         else{
-//             res.send("Not match");
-//         }
-
-//     } catch (error) {
-//         res.status(400).send(error);
-//     }
-// })
 
 
 //work
@@ -418,18 +391,6 @@ app.get('/logout',auth,async(req,res)=>{
 
 
 
-// app.get('/list',async(req,res)=>{
-//     await Register.find((err,doc)=>{
-//         if(!err){
-//             res.render("list",{
-//                 list:doc
-//             });
-//         }
-//         else{
-//             re.send("Failed");
-//         }
-//     })
-// })
 app.get('/list',auth, (req,res) => {
     Register.find((err, docs) => {
     if(!err){
@@ -440,6 +401,7 @@ app.get('/list',auth, (req,res) => {
     }
     });
     });
+
     //****************contact***********************
     app.post('/addcontact',async(req,res )=>{
         try {
@@ -453,7 +415,7 @@ app.get('/list',auth, (req,res) => {
                      
                      )
                      const added=await addContact.save();
-                     res.status(201).render("contactlist.hbs");
+                     res.redirect("contactlist");
           
     
         } catch (error) {
@@ -593,16 +555,19 @@ app.get('/getmovie/:id',(req,res)=>{
    
  app.get('/avgcomnt/:id',(req,res)=>{
     var id = req.params.id;
-
+    
     Comment.aggregate(
         [
+           
             {
                 $group:
                 {
-                    _id:id,
+                   
+                    _id:req.params.id,
                     rating:
                     {
-                        $avg:"$rating"
+                        // $avg:"$rating"
+                        $avg:{$multiply:["$rating"]}
                        
                     }
                     
